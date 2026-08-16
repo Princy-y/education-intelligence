@@ -1,6 +1,10 @@
 const pool = require("../db/database");
 const axios = require("axios");
 
+const {
+    generateAcademicRecommendations
+} = require("./academicRecommendationService");
+
 const ML_SERVICE_URL =
     process.env.ML_SERVICE_URL || "http://127.0.0.1:8001";
 
@@ -257,7 +261,11 @@ if (exams.length > 0) {
 
 
     const risk = mlResponse.data;
-
+    const recommendations =
+    generateAcademicRecommendations(
+        features,
+        risk
+    );
 
     // ============================================
     // 7. Return complete intelligence
@@ -288,7 +296,11 @@ if (exams.length > 0) {
         risk: {
             score: risk.risk_score,
             level: risk.risk_level
-        }
+        },
+
+        insights: recommendations.insights,
+
+        recommendations: recommendations.recommendations
 
     };
 }
