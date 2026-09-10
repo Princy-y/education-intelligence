@@ -1,4 +1,4 @@
-# EduIntel
+# EduIntel..
 
 ## AI-Powered Academic Risk Intelligence & Early Intervention Platform
 
